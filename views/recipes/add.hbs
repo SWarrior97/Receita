@@ -1,0 +1,45 @@
+<br>
+<section class="containerRecipes">
+  <div class="one">
+      <form action="/recipes" method="POST" id="form">
+            <div class="form left">
+                <h3>Add Recipe</h3>
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name" class="input-city">
+                <label for="price">Product</label>
+                <select name="product" id="product" class="input-city">
+                    {{#each products}}
+                        <option value="{{id}}">{{name}}</option>
+                    {{/each}}
+                </select>
+                <label for="name">Quantity</label>
+                <input type="text" name="quantity" id="quantity" class="input-city">
+                <button class="addProductRecipe" id="addProduct">Add</button>
+                <br>
+                <label for="name">Prepare</label>
+                <textarea name="preparation" rows="6" cols="30" class="input-city"></textarea>
+                <textarea name="ingredients2" rows="6" cols="30" class="input-city" id="ingredients2" hidden></textarea>
+            </div>
+
+            <div >
+                <div class="row">
+                    <input type="submit" value="Save" class="formBtnSave">
+                    <a href="/" class="formBtnCancel">Cancel</a>
+                </div>
+            </div>
+        </form>
+  </div>
+  <div class="two">
+      <table class="table table-dark" style="margin-top: 1.5rem;" id="tableProduct">
+        <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Quantity</th>
+        </tr>
+        </thead>
+        <tbody>
+                
+        </tbody>
+    </table>
+  </div>
+</section>

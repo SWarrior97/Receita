@@ -35,6 +35,7 @@ app.use(express.static(path.join(__dirname,'public')))
 app.use('/',require('./routes/index'))
 app.use('/shoppingList',require('./routes/shoppingList'))
 app.use('/product',require('./routes/product'))
+app.use('/recipes',require('./routes/recipes'))
 
 const PORT = process.env.PORT || 3000
 

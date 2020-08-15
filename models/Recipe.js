@@ -3,7 +3,7 @@ const { v4: uuidv4 } = require('uuid');
 
 const RecipeSchema = new mongoose.Schema({
     id:{
-        type:Number,
+        type:String,
         default:uuidv4()
     },
     name:{
@@ -19,6 +19,12 @@ const RecipeSchema = new mongoose.Schema({
         type:String,
         required:true
     },
+    ingredients:{
+        type:Array,
+        default:[],
+        required:true
+    }
+
 })
 
 module.exports = mongoose.model('Recipe', RecipeSchema)

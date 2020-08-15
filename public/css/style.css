@@ -19,6 +19,20 @@ body{
     font-size: 1.2rem;  
 }
 
+.recipeDetails {
+    color: white;
+    text-decoration: none; 
+    font-weight: bold;  
+    font-size: 1.2rem;  
+}
+
+.recipeDetails:hover {
+    color: rgba(255, 255, 255, 0.884);
+    text-decoration: none; 
+    font-weight: bold;  
+    font-size: 1.2rem;  
+}
+
 .page {
     background-image:url('../img/bg.jpg');
     height: 100%;
@@ -141,4 +155,129 @@ label{
     text-align: center;
     padding-top: 5rem;
     font-size: 3rem;
+}
+
+.formRight{
+    position: absolute;
+    left: 150px;
+    width: 200px;
+    height: 120px;
+}
+
+.containerRecipes {
+    width: 85%;
+    height: 90%;
+    margin: auto;
+    padding: 10px;
+    background-color: white;
+  }
+  
+  .one {
+    padding-left: 1rem;
+    width: 15%;
+    height: 200px;
+    float: left;
+  }
+  
+  .two {
+    padding-left: 5rem;
+    margin-left: 15%;
+    height: 200px;
+  }
+
+  .addProductRecipe{
+    background-color: #F89104;
+    border: none;
+    width: 30%;
+    height: 10%;
+    color: white;
+    font-weight: bold;
+    padding: 1em 0;
+    border-radius: .5em;
+    font-size: .8em;
+    cursor: pointer;
+    margin-right: 1.5rem;
+    text-align: center;
+  }
+
+@media (max-width: 1480px) {
+    .cardName{
+        text-align: center;
+        font-size: medium;
+    }
+
+}
+
+@media (max-width: 1180px) {
+    .cardName{
+        margin-left: -.5rem;
+        text-align: center;
+        font-size: 1rem;
+    }
+
+}
+
+
+@media (max-width: 810px) {
+    .cardName{
+        margin-left: -.5rem;
+        text-align: center;
+        font-size: .8rem;
+    }
+
+}
+
+@media (max-width: 680px) {
+    .cardName{
+        margin-left: -.5rem;
+        text-align: center;
+        font-size: .6rem;
+    }
+
+}
+
+@media (max-width:575px) {
+    .hero-bg a {
+        color: white;
+        text-decoration: none; 
+        font-weight: bold;  
+        font-size: .6rem;
+        margin-left: 0;
+        float:left;  
+    }
+}
+
+
+@media (max-width:375px) {
+    .cardName{
+        margin-left: -.5rem;
+        font-size: xx-small;
+    }
+
+    .card{
+        width: 25%;
+        height: 30;
+    }
+
+}
+
+
+@media (max-width:522px) {
+    .cardName{
+        margin-left: -.5rem;
+        font-size: xx-small;
+    }
+
+    .card{
+        width: 35%;
+        height: 30;
+    }
+
+    .fixed-action-btn i{
+        font-size: 3rem; 
+        color: var(--siteColor); 
+        position: absolute;
+        right:    1.2rem;
+        bottom: 10rem;
+      }
 }
