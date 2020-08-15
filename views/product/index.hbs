@@ -1,0 +1,24 @@
+{{#if products}}
+<table class="table table-dark" style="margin-top: 1.5rem;">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Price</th>
+      </tr>
+    </thead>
+    <tbody>
+        {{#each products}}
+            <tr>
+                <td>{{name}}</td>
+                <td>{{price}}</td>
+            </tr>
+        {{/each}}
+    </tbody>
+  </table>
+{{else}}
+    <p class="noProduct">Dont have products yet.</p>
+{{/if}}
+
+<div class="fixed-action-btn">
+    <a href="/product/add"><i class="fas fa-plus-circle"></i></i></a>
+</div>
