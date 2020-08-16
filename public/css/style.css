@@ -12,6 +12,18 @@ body{
     height: 100%;
 }
 
+.delete{
+    text-decoration: none;
+    color:white;
+    background-color: Transparent;
+    border: none;
+}
+
+.delete:hover{
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.884);
+}
+
 .errorMessage{
     font-weight: bold;
     color:black;
@@ -107,6 +119,14 @@ body{
     position: absolute;
     right:    1.2rem;
     bottom: 5rem;
+  }
+
+  .fixed-action-btnRemove i{
+    font-size: 5rem; 
+    color: var(--siteColor); 
+    position: absolute;
+    right:    1.2rem;
+    bottom: 12rem;
   }
 
   .addShoopingList{

@@ -13,6 +13,23 @@ router.get('/add',(req,res) =>{
 	res.render('ShoppingList/add')
 })
 
+router.delete('/remove/:id', async (req, res) => {
+	try {
+	  let shoppingList = await ShoppingList.findById(req.params.id).lean()
+  
+	  if (!shoppingList) {
+		return res.render('error/404')
+	  }
+  
+		await ShoppingList.remove({ _id: req.params.id })
+		  
+		res.redirect('/')
+	} catch (err) {
+	  console.error(err)
+	  return res.render('error/500')
+	}
+  })
+
 router.get('/product/add/:id',async (req,res) =>{
 	const products = await Product.find().lean()
 	let shoppingList =  await ShoppingList.findById(req.params.id).lean()
@@ -22,7 +39,51 @@ router.get('/product/add/:id',async (req,res) =>{
 	})
 })
 
-router.post('/product/add/:id',async (req,res) =>{
+router.put('/product/remove/:id',async (req,res) =>{
+	try{
+		let shoppingList =  await ShoppingList.findById(req.params.id).lean()
+
+		let product =  await Product.findOne({_id:req.body.product}).lean()
+
+		
+
+		let price = product.price * req.body.quantity;
+
+		shoppingList.totalPrice = shoppingList.totalPrice - price;
+
+		shoppingList.products.forEach(function(p){
+			if(p.id.localeCompare(product.id)){
+				shoppingList.products.splice(p,1)
+			}
+		});
+
+		for(let i=0;i<shoppingList.products.length;i++){
+			console.log("asdasd")
+			if(product.id === shoppingList.products[i].id){
+				shoppingList.products.splice(i,1)
+			}
+		}
+
+		console.log(shoppingList.products)
+
+		shoppingList.products.splice(parseInt(req.body.row)-1,1)
+
+		shoppingList = await ShoppingList.findOneAndUpdate({ _id: req.params.id }, shoppingList, {
+			new: true,
+			runValidators: true,
+		})
+
+		let url = '/shoppingList/details/'+shoppingList._id;
+		  
+		res.redirect(url)
+
+	}catch(err){
+		console.log(err)
+		res.render('error/500')
+	}
+})
+
+router.put('/product/add/:id',async (req,res) =>{
 	try{
 		let shoppingList =  await ShoppingList.findById(req.params.id).lean()
 
@@ -58,7 +119,7 @@ router.post('/product/add/:id',async (req,res) =>{
 			runValidators: true,
 		  })
 		
-		  let url = '/shoppingList/details/'+shoppingList._id;
+		let url = '/shoppingList/details/'+shoppingList._id;
 		  
 		res.redirect(url)
 

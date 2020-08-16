@@ -1,6 +1,7 @@
 <div class="addShoopingList">
     <div class="form-container">
         <form action="/shoppingList/product/add/{{shoppingList._id}}" method="POST">
+        <input type="hidden" name="_method" value="PUT">
             <div class="form left">
                 <h3>Add Product to {{shoppingList.name}}</h3>
                 <label for="name">Product</label>

@@ -1,6 +1,11 @@
 let btn = document.getElementById('addProduct');
 let ingredients = document.getElementById('ingredients2');
 
+$('#productShoppingList').find('tr').click( function(){
+    var row = $(this).index()+1;
+    document.getElementById("row").value = row;
+    console.log(document.getElementById("row").value)
+});
 
 btn.addEventListener('click', (event) => {
     event.preventDefault()
