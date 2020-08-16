@@ -19,6 +19,17 @@ body{
     border: none;
 }
 
+.edit{
+    float: left;
+    margin-right: 10px;
+    color:white;
+}
+
+.edit:hover{
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.884);
+}
+
 .delete:hover{
     text-decoration: none;
     color: rgba(255, 255, 255, 0.884);
@@ -140,7 +151,18 @@ body{
     margin: 2em -1em 0;
     padding: 2em;
     width: 60%;
-}
+   }
+
+   .editSL{
+       float: right;
+       margin-right: 1rem;
+       color:var(--siteColor);
+   }
+
+    .editSL:hover{
+        text-decoration: none;
+        color: var(--siteColor);
+    }
 
 label{
     color: #2D7D98;
@@ -327,6 +349,7 @@ label{
 
 
 @media (max-width:522px) {
+    /* phone */
     .cardName{
         margin-left: -.5rem;
         font-size: xx-small;
@@ -344,4 +367,19 @@ label{
         right:    1.2rem;
         bottom: 10rem;
       }
+
+    .fixed-action-btnRemove i{
+        font-size: 3rem; 
+        color: var(--siteColor); 
+        position: absolute;
+        right:    1.2rem;
+        bottom: 15rem;
+    }
+
+    .form-container {
+        background-color: white;
+        margin: 2em -1em 0;
+        padding: 2em;
+        width: 180%;
+    }
 }

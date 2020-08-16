@@ -45,8 +45,6 @@ router.put('/product/remove/:id',async (req,res) =>{
 
 		let product =  await Product.findOne({_id:req.body.product}).lean()
 
-		
-
 		let price = product.price * req.body.quantity;
 
 		shoppingList.totalPrice = shoppingList.totalPrice - price;
@@ -145,6 +143,38 @@ router.get('/details/:id',async(req,res) =>{
     res.render('ShoppingList/details',{
         shoppingList
     })
+})
+
+router.get('/edit/:id',async(req,res) =>{
+    const shoppingList =  await ShoppingList.findById(req.params.id).lean()
+
+
+    res.render('ShoppingList/edit',{
+		shoppingList
+    })
+})
+
+router.put('/:id',async (req,res) =>{
+	let shoppingList =  await ShoppingList.findById(req.params.id).lean()
+
+    try{
+
+		if (!shoppingList) {
+			return res.render('error/404')
+		}
+
+		shoppingList = await ShoppingList.findOneAndUpdate({ _id: req.params.id }, req.body, {
+			new: true,
+			runValidators: true,
+        })
+		
+		let url = '/shoppingList/details/'+shoppingList._id;
+		  
+		res.redirect(url)
+	}catch(err){
+		console.log(err)
+		res.render('error/500')
+	}
 })
 
 module.exports = router

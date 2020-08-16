@@ -1,7 +1,7 @@
 {{#if shoppingList}}
 <br>
 
-<h1>{{shoppingList.name}}:{{shoppingList.totalPrice}}€</h1>
+<h1>{{shoppingList.name}}:{{shoppingList.totalPrice}}€ <div class="editShoppingList"><a href="/shoppingList/edit/{{shoppingList._id}}" class="editSL"><i class="fas fa-edit"></i></a></div></h1>
 
 
 <table class="table table-dark" style="margin-top: 1.5rem;" id="productShoppingList">

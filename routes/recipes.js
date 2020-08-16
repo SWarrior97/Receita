@@ -57,4 +57,64 @@ router.post('/',async (req,res) =>{
 })
 
 
+router.delete('/remove/:id', async (req, res) => {
+	try {
+	  let recipe = await Recipe.findById(req.params.id).lean()
+  
+	  if (!recipe) {
+		return res.render('error/404')
+	  }
+  
+		await Recipe.remove({ _id: req.params.id })
+		  
+		res.redirect('/recipes')
+	} catch (err) {
+	  console.error(err)
+	  return res.render('error/500')
+	}
+})
+
+router.get('/edit/:id',async(req,res) =>{
+    const recipe =  await Recipe.findById(req.params.id).lean()
+    const products = await Product.find().lean()
+
+    let auxiliar = '';
+
+    for(let i=0;i<recipe.ingredients.length;i++){
+        auxiliar = auxiliar + recipe.products[i].id +"->"+recipe.products[i].name+"->"+recipe.ingredients[i].quantity+";";
+    }
+
+    res.render('recipes/edit',{
+        recipe,
+        products,
+        auxiliar
+    })
+})
+
+router.put('/:id',async (req,res) =>{
+    let recipe =  await Recipe.findById(req.params.id).lean()
+
+    try{
+        var splitted = req.body.ingredients2.split(';');
+        req.body.ingredients = [];
+        req.body.products = [];
+
+        for(let i=0;i<splitted.length-1;i++){
+            var aux = splitted[i].split('->');
+            req.body.ingredients.push({name:aux[1],quantity:aux[2]});
+            req.body.products.push({name:aux[1],id:aux[0]})
+        }
+        
+		recipe = await Recipe.findOneAndUpdate({ _id: req.params.id }, req.body, {
+			new: true,
+			runValidators: true,
+        })
+        
+		res.redirect('/recipes')
+	}catch(err){
+		console.log(err)
+		res.render('error/500')
+	}
+})
+
 module.exports = router

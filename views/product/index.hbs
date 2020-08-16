@@ -4,6 +4,7 @@
       <tr>
         <th scope="col">Name</th>
         <th scope="col">Price</th>
+        <th scope="col">Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -11,6 +12,16 @@
             <tr>
                 <td>{{name}}</td>
                 <td>{{price}}</td>
+                <td>
+                  <a href="/product/edit/{{_id}}" class="edit"><i class="fas fa-edit"></i></a>
+                  <form action="/product/remove/{{_id}}" method="POST">
+                        <input type="hidden" name="_method" value="delete">
+                        <input type="text" name="product" id="product" value="{{_id}}" hidden>
+                        <button type="submit" id="submitForm" class="delete">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </form>
+                </td>
             </tr>
         {{/each}}
     </tbody>
