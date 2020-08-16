@@ -1,0 +1,24 @@
+<div class="addShoopingList">
+    <div class="form-container">
+        <form action="/shoppingList/product/add/{{shoppingList._id}}" method="POST">
+            <div class="form left">
+                <h3>Add Product to {{shoppingList.name}}</h3>
+                <label for="name">Product</label>
+                <select name="product" id="product" class="input-city">
+                    {{#each products}}
+                        <option value="{{id}}">{{name}}</option>
+                    {{/each}}
+                </select>
+                <label for="quantity">Quantity</label>
+                <input type="number" name="quantity" id="quantity" class="input-city">
+            </div>
+            
+            <div >
+                <div class="row">
+                    <input type="submit" value="Save" class="formBtnSave">
+                    <a href="/shoppingList/details/{{shoppingList._id}}" class="formBtnCancel">Cancel</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

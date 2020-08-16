@@ -1,0 +1,31 @@
+{{#if shoppingList}}
+<br>
+
+<h1>{{shoppingList.name}}:{{shoppingList.totalPrice}}€</h1>
+
+
+<table class="table table-dark" style="margin-top: 1.5rem;">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Price</th>
+      </tr>
+    </thead>
+    <tbody>
+        {{#each shoppingList.products}}
+            <tr>
+                <td>{{name}}</td>
+                <td>{{quantity}}</td>
+                <td>{{price}}</td>
+            </tr>
+        {{/each}}
+    </tbody>
+  </table>
+{{else}}
+    <p class="noProduct">Dont have products yet on the shopping List.</p>
+{{/if}}
+
+<div class="fixed-action-btn">
+    <a href="/shoppingList/product/add/{{shoppingList._id}}"><i class="fas fa-plus-circle"></i></i></a>
+</div>

@@ -1,9 +1,11 @@
 {{#each shoppingLists}}
 <div class="card">
-    <img src="img/sl.jpg" class="image">
-    <div class="container">
-        <h4><b class="cardName">{{name}}</b></h4> 
-    </div>
+    <a href="/shoppingList/details/{{_id}}">
+        <img src="img/sl.jpg" class="image">
+        <div class="container">
+            <h4><b class="cardName">{{name}}</b></h4> 
+        </div>
+    </a>
 </div>
 {{/each}}
 

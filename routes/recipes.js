@@ -30,7 +30,6 @@ router.get('/add',async(req,res) =>{
 
 router.get('/details/:id',async(req,res) =>{
     let recipe =  await Recipe.findById(req.params.id).lean()
-    console.log(recipe)
 
     res.render('recipes/details',{
         recipe
