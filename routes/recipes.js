@@ -3,6 +3,8 @@ const router = express.Router()
 const Recipe = require('../models/Recipe')
 const Product = require('../models/Product')
 var path = require("path");
+var multer  = require('multer')
+var upload = multer({ dest: 'uploads/' })
 
 
 // @desc   
@@ -31,13 +33,22 @@ router.get('/add',async(req,res) =>{
 router.get('/details/:id',async(req,res) =>{
     let recipe =  await Recipe.findById(req.params.id).lean()
 
+    let auxiliar = '';
+
+    recipe.ingredients.forEach(async function(record){
+        auxiliar = auxiliar + record.quantity +" "+record.name +"\n";
+    })
+
     res.render('recipes/details',{
-        recipe
+        recipe,
+        auxiliar
     })
 })
 
-router.post('/',async (req,res) =>{
+router.post('/', upload.single('file'),async (req,res) =>{
 	try{
+        console.log(req.file)
+        req.body.image = req.file.path
         var splitted = req.body.ingredients2.split(';');
         req.body.ingredients = [];
         req.body.products = [];

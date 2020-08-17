@@ -1,0 +1,19 @@
+<section class="containerRecipe">
+  <div class="oneRecipe">
+      <img src="/{{recipe.image}}" class="imageRecipe">
+  </div>
+  <div class="twoRecipe">
+       <h3 class="preparationIngredient">Ingredients</h3>
+       <textarea name="preparation" rows="13" cols="15"readonly class="ingredientsSetup">{{auxiliar}}</textarea>   
+  </div>
+</section>
+
+<section>
+    <div class="preparation">
+        <h3 class="preparationText">Preparation</h3>
+        <textarea name="preparation" rows="12" cols="100"readonly class="preparationSetup">{{recipe.preparation}}</textarea>
+    </div>
+    <div class="buttons">
+        <a href="/recipes" class="backButton"><i class="fas fa-long-arrow-alt-left"></i></a>
+    </div>
+</section>

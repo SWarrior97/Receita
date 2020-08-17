@@ -1,7 +1,7 @@
 <br>
 <section class="containerRecipes">
   <div class="one">
-      <form action="/recipes" method="POST" id="form">
+      <form action="/recipes" method="POST" id="form" enctype="multipart/form-data">
             <div class="form left">
                 <h3>Add Recipe</h3>
                 <label for="name">Name</label>
@@ -19,6 +19,9 @@
                 <label for="name">Prepare</label>
                 <textarea name="preparation" rows="6" cols="30" class="input-city"></textarea>
                 <textarea name="ingredients2" rows="6" cols="30" class="input-city" id="ingredients2" hidden></textarea>
+                <input class="input-city" type="file" name="file">
+                <br>
+                <br>
             </div>
 
             <div >

@@ -23,6 +23,10 @@ const RecipeSchema = new mongoose.Schema({
         type:Array,
         default:[],
         required:true
+    },
+    image:{
+        type:String,
+        default:''
     }
 
 })

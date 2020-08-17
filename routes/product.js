@@ -3,6 +3,8 @@ const router = express.Router()
 const Product = require('../models/Product')
 const ShoppingList = require('../models/shoppingList')
 var path = require("path");
+var multer  = require('multer')
+var upload = multer()
 
 
 // @desc show add stories /stories/add
@@ -24,7 +26,7 @@ router.get('/add',(req,res) =>{
 	res.render('product/add')
 })
 
-router.post('/',async (req,res) =>{
+router.post('/', upload.none(),async (req,res) =>{
 	try{
 		await Product.create(req.body)
 		res.redirect('/product')

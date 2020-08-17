@@ -5,6 +5,8 @@ const Product = require('../models/Product')
 var path = require("path");
 var mongoose = require('mongoose');
 const { ObjectId } = require('mongodb')
+var multer  = require('multer')
+var upload = multer()
 
 
 // @desc show add stories /stories/add
@@ -127,7 +129,7 @@ router.put('/product/add/:id',async (req,res) =>{
 	}
 })
 
-router.post('/',async (req,res) =>{
+router.post('/',upload.none(),async (req,res) =>{
 	try{
 		await ShoppingList.create(req.body)
 		res.redirect('/')
