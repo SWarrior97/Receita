@@ -4,8 +4,10 @@ const morgan = require('morgan')
 const exphbs = require('express-handlebars')
 const mongoose = require('mongoose')
 const connectDB = require('./config/db')
-const path = require('path');
+const path = require('path')
 const methodOverride = require('method-override')
+var ip = require("ip")
+
 
 
 //load config
@@ -51,5 +53,7 @@ app.use('/product',require('./routes/product'))
 app.use('/recipes',require('./routes/recipes'))
 
 const PORT = process.env.PORT || 3000
+const HOSTNAME = ip.address();
 
-app.listen(PORT,console.log(`Server running in ${process.env.NODE_ENV} on port ${PORT}`))
+
+app.listen(PORT,HOSTNAME,console.log(`Server running in ${process.env.NODE_ENV} on port ${PORT} Hostname ${HOSTNAME}`))

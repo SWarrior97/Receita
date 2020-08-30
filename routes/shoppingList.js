@@ -47,26 +47,31 @@ router.put('/product/remove/:id',async (req,res) =>{
 
 		let product =  await Product.findOne({_id:req.body.product}).lean()
 
-		let price = product.price * req.body.quantity;
-
-		shoppingList.totalPrice = shoppingList.totalPrice - price;
+		let prodAux = [];
 
 		shoppingList.products.forEach(function(p){
-			if(p.id.localeCompare(product.id)){
-				shoppingList.products.splice(p,1)
+			if(p.id !== product.id){
+				prodAux.push(p)
 			}
 		});
 
-		for(let i=0;i<shoppingList.products.length;i++){
-			console.log("asdasd")
-			if(product.id === shoppingList.products[i].id){
-				shoppingList.products.splice(i,1)
+		
+
+		shoppingList.products = prodAux;
+
+		let price = 0;
+
+		shoppingList.products.forEach(function(p){
+			if(p.quantity.toLowerCase().includes('kg')){
+				let auxQuantity = parseFloat(p.quantity.toLowerCase().split('k')[0]);
+
+				price = price + auxQuantity * p.price;
+			}else{
+				price = price + p.quantity * p.price;
 			}
-		}
+		});
 
-		console.log(shoppingList.products)
-
-		shoppingList.products.splice(parseInt(req.body.row)-1,1)
+		shoppingList.totalPrice = price;
 
 		shoppingList = await ShoppingList.findOneAndUpdate({ _id: req.params.id }, shoppingList, {
 			new: true,
@@ -74,7 +79,7 @@ router.put('/product/remove/:id',async (req,res) =>{
 		})
 
 		let url = '/shoppingList/details/'+shoppingList._id;
-		  
+		
 		res.redirect(url)
 
 	}catch(err){
@@ -92,13 +97,25 @@ router.put('/product/add/:id',async (req,res) =>{
 		}
 		var _id =req.body.product;
 		let product =  await Product.findOne({id:_id}).lean()
+
+		if(req.body.quantity.toLowerCase().includes('kg')){
+			req.body.quantity = req.body.quantity.toLowerCase();
+		}
 		
 		product.quantity = req.body.quantity;
 
 		req.body.name = shoppingList.name;
 
-		let price = req.body.quantity * product.price
-		
+		let quantityWithoutUnity = req.body.quantity.split('k')[0];
+		let price = 0;
+
+		if(req.body.quantity.toLowerCase().includes('kg')){
+			let priceFloat = parseFloat(quantityWithoutUnity)
+			price = priceFloat * product.price ;
+		}else{
+			price = req.body.quantity * product.price
+		}
+
 		req.body.totalPrice = shoppingList.totalPrice + price;
 		
 		req.body.products = [];
