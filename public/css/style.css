@@ -127,8 +127,7 @@ body{
   .fixed-action-btn i{
     font-size: 5rem; 
     color: var(--siteColor); 
-    position: absolute;
-    right:    1.2rem;
+    right: 1.2rem;
     bottom: 5rem;
   }
 
