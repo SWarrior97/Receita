@@ -17,6 +17,13 @@ const ProductSchema = new mongoose.Schema({
     quantity:{
         type:String,
         default:''
+    },
+    category:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Category"
+    },
+    categoryName:{
+        type:String
     }
 })
 

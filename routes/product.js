@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Product = require('../models/Product')
 const ShoppingList = require('../models/shoppingList')
+const Category = require('../models/Category')
 var path = require("path");
 var multer  = require('multer')
 var upload = multer()
@@ -22,12 +23,17 @@ router.get('/',async(req,res) =>{
 	
 })
 
-router.get('/add',(req,res) =>{
-	res.render('product/add')
+router.get('/add',async(req,res) =>{
+	const categories = await Category.find().lean()
+	res.render('product/add',{
+		categories
+	})
 })
 
 router.post('/', upload.none(),async (req,res) =>{
 	try{
+		let category = await Category.findById(req.body.category).lean()
+		req.body.categoryName = category.name
 		await Product.create(req.body)
 		res.redirect('/product')
 	}catch(err){
@@ -55,10 +61,11 @@ router.delete('/remove/:id', async (req, res) => {
 
 router.get('/edit/:id',async(req,res) =>{
     const product =  await Product.findById(req.params.id).lean()
-
+	const categories = await Category.find().lean()
 
     res.render('product/edit',{
-		product
+		product,
+		categories
     })
 })
 
@@ -66,6 +73,16 @@ router.get('/edit/:id',async(req,res) =>{
 router.put('/:id',async (req,res) =>{
 	let product =  await Product.findById(req.params.id).lean()
 	const shoppingList = await ShoppingList.find().lean()
+	let category = await Category.findById(req.body.category).lean()
+
+	if(category == null){
+		return res.render('error/custom',{
+			title:"Category",
+			content:"Category cannot be null"
+		})
+	}
+
+	req.body.categoryName = category.name
 
     try{
 

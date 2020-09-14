@@ -13,6 +13,11 @@ var ip = require("ip")
 //load config
 dotenv.config({path:'./config/config.env'})
 
+// Handlebars Helpers
+const {
+	compareStrings,
+  } = require('./helpers/hbs')
+
 //connect to db
 connectDB();
 
@@ -40,7 +45,16 @@ if(process.env.NODE_ENV === 'development'){
 }
 
 //Handlebars
-app.engine('.hbs',exphbs({defaultLayout:'main',extname:'.hbs'}));
+app.engine('.hbs',exphbs({
+	  helpers: {
+		compareStrings,
+	  },
+	  defaultLayout: 'main',
+	  extname: '.hbs',
+	})
+)
+
+
 app.set('view engine','.hbs')
 
 //Static folder
@@ -51,6 +65,7 @@ app.use('/',require('./routes/index'))
 app.use('/shoppingList',require('./routes/shoppingList'))
 app.use('/product',require('./routes/product'))
 app.use('/recipes',require('./routes/recipes'))
+app.use('/category',require('./routes/category'))
 
 const PORT = process.env.PORT || 3000
 const HOSTNAME = ip.address();

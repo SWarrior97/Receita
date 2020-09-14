@@ -1,22 +1,18 @@
-{{#if products}}
+{{#if categories}}
 <table class="table table-dark" style="margin-top: 1.5rem;">
     <thead>
       <tr>
         <th scope="col">Name</th>
-        <th scope="col">Price</th>
-        <th scope="col">Category</th>
         <th scope="col">Actions</th>
       </tr>
     </thead>
     <tbody>
-        {{#each products}}
+        {{#each categories}}
             <tr>
                 <td>{{name}}</td>
-                <td>{{price}}</td>
-                <td>{{categoryName}}</td>
                 <td>
-                  <a href="/product/edit/{{_id}}" class="edit"><i class="fas fa-edit"></i></a>
-                  <form action="/product/remove/{{_id}}" method="POST">
+                  <a href="/category/edit/{{_id}}" class="edit"><i class="fas fa-edit"></i></a>
+                  <form action="/category/remove/{{_id}}" method="POST">
                         <input type="hidden" name="_method" value="delete">
                         <input type="text" name="product" id="product" value="{{_id}}" hidden>
                         <button type="submit" id="submitForm" class="delete">
@@ -29,9 +25,9 @@
     </tbody>
   </table>
 {{else}}
-    <p class="noProduct">Dont have products yet.</p>
+    <p class="noProduct">Dont have Category yet.</p>
 {{/if}}
 
 <div class="fixed-action-btn">
-    <a href="/product/add"><i class="fas fa-plus-circle"></i></i></a>
+    <a href="/category/add"><i class="fas fa-plus-circle"></i></i></a>
 </div>
