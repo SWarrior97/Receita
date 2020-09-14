@@ -96,7 +96,7 @@ router.put('/product/add/:id',async (req,res) =>{
 			return res.render('error/404')
 		}
 		var _id =req.body.product;
-		let product =  await Product.findOne({id:_id}).lean()
+		let product =  await Product.findById(_id).lean()
 
 		if(req.body.quantity.toLowerCase().includes('kg')){
 			req.body.quantity = req.body.quantity.toLowerCase();

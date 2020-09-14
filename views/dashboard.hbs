@@ -1,14 +1,21 @@
-{{#each shoppingLists}}
-<div class="card">
-    <a href="/shoppingList/details/{{_id}}">
-        <img src="img/sl.jpg" class="image">
-        <div class="container">
-            <h4><b class="cardName">{{name}}</b></h4> 
+{{#if shoppingLists}}
+    {{#each shoppingLists}}
+        <div class="card">
+            <a href="/shoppingList/details/{{_id}}">
+                <img src="img/sl.jpg" class="image">
+                <div class="container">
+                    <h4><b class="cardName">{{name}}</b></h4> 
+                </div>
+            </a>
         </div>
-    </a>
-</div>
-{{/each}}
+    {{/each}}
+
+{{else}}
+    <p class="noProduct">Dont have Shopping List yet.</p>
+{{/if}}
 
 <div class="fixed-action-btn">
     <a href="/shoppingList/add"><i class="fas fa-plus-circle"></i></i></a>
 </div>
+
+
